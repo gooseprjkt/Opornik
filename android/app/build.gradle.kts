@@ -35,6 +35,33 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+            
+            // Optimize for size
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    
+    // Additional size optimizations
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+        resources {
+            excludes += setOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+                "**/kotlin/**",
+                "**/*.kotlin_metadata",
+                "**/*.kotlin_builtins",
+                "**/kotlin/**",
+                "**/*.version",
+                "**/kotlin-tooling-metadata.json"
+            )
         }
     }
 }
