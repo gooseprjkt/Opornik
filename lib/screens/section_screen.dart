@@ -39,9 +39,9 @@ class _SectionScreenState extends State<SectionScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(child: Text('Ошибка: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No rules available'));
+            return const Center(child: Text('Правил нет :('));
           } else {
             final rules = snapshot.data!;
             return ListView.builder(
